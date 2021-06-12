@@ -1,0 +1,42 @@
+<?php $_product = $this->getProductInfo() ?>
+<div class="fieldset">
+    <div class="field postcode">
+        <label class="label" for="pdpshippingrate.postcode"><span><?= __('Calcular costo de envío') ?></span></label>
+        <div class="control">
+            <input type="text" minlength="8" maxlength="8" oninput="this.value=this.value.replace(/[^0-9]/g,'');" name="pdpshippingrate-postcode" id="pdpshippingrate-postcode" maxlength="9" title="<?= __('Código Postal') ?>" class="input-text pdpshippingrate-postcode mask-cep" placeholder="<?= __('Ingrese su CP (sólo números)') ?>" >
+        </div>
+    </div>
+    <div class="postcode-action">
+        <button name="btn-estimate-shipping" id="btn-estimate-shipping" type="button" title="<?= __('Calcular') ?>" class="action primary tocart"><?= __('Calcular') ?></button>
+    </div>
+    <input type="hidden" name="pdpshippingrate_product_id" id="pdpshippingrate_product_id" value="<?= $_product->getId() ?>">
+    <div id="shipping-estimate-results" class="shipping-estimate-results"></div>
+</div>
+<script>
+    require ([
+            'jquery'
+        ],
+        function ($) {
+            $(window).on("load", function () {
+                require([
+                    'improntusPDPShippingRate'
+                ]);
+            });
+        });
+</script>
+
+<style>
+ .shipping-estimate-results{
+     color: #618e8b;
+     font-weight: bold;
+     text-align: left;
+ }
+ .shipping-estimate-results p:before{
+     content: " ";
+     margin-top: 15px;
+     margin-bottom: 10px;
+     border: 1px solid rgba(169,169,169,.50);
+     display: block;
+     max-width: 40%;
+ }
+</style>
